@@ -1,0 +1,75 @@
+<html>
+<head>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <style>
+        .container-fluid {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl as ctrl">
+
+<div class="container-fluid">
+    <h5>新增資料</h5>
+    <div class="form-group">
+        <label>會員名稱</label>
+        <input type="text" class="form-control" ng-model="model.name" name="name" placeholder="姓名"/>
+    </div>
+    <div class="form-group">
+        <label>會員手機</label>
+        <input type="text" class="form-control" ng-model="model.phone" name="phone" placeholder="手機號碼" ng-maxlength="10">
+    </div>
+    <div class="form-group">
+        <label>會員地址</label>
+        <input type="text" class="form-control" ng-model="model.address" name="address" placeholder="地址">
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlTextarea1">備註</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" ng-model="model.note" name="desc" rows="3"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary" ng-click="add()" >Add</button>
+    <button type="button" class="btn btn-outline-dark" ng-click="rest()" >Cancel</button>
+</div>
+
+<div class="container-fluid">
+    <h5>列表資料</h5>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col" ng-repeat="(key, value) in table.label">{{ value.name }}</th>
+            <th scope="col">功能</th>
+          </tr>
+        </thead>
+        <tbody ng-repeat="(key, value) in table.memberData">
+            <tr ng-hide="item == value.id">
+                <td>{{ value.Number }}</td>
+                <td>{{ value.Name }}</td>
+                <td>{{ value.Phone }}</td>
+                <td>{{ value.Address }}</td>
+                <td>{{ value.Note }}</td>
+                <td>
+                    <button type="button" class="btn btn-warning" ng-click="edit($event)" value={{value.id}}>Edit</button>
+                    <button type="button" class="btn btn-danger" ng-click="delete($event)" value={{value.id}}>Delete</button>
+                </td>
+            </tr>
+
+            <tr ng-show="item == value.id">
+                <td>{{value.Number}}</td>
+                <td><input class="modifyName" type="text" ng-model="value.Name"></td>
+                <td><input class="modifyPhone" type="text" ng-model="value.Phone" ng-maxlength="10"></td>
+                <td><input class="modifyAddr" type="text" ng-model="value.Address"></td>
+                <td><input class="modifyNote" type="text" ng-model="value.Note"></td>
+                <td>
+                    <button type="button" class="btn btn-outline-primary" value={{value.id}} ng-click="saveEdit(key, $event)">Save</button>
+                    <button type="button" class="btn btn-outline-dark" ng-click="cancelEdit()">Cancel</button>
+                </td>  
+            </tr>
+        </tbody>
+      </table>
+</div>
+
+
+<script src="node_modules/angular/angular.min.js"></script>
+<script src="built/local/output.js"></script>
+</body>
+</html>
