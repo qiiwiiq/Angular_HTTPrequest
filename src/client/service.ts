@@ -11,17 +11,13 @@ namespace myApp {
         getTableFields = () => {
             // get http://localhost:3000/Fields
             return this.$http
-                .get("http://localhost:3000/Fields")
-                .then( data => data )
-                .catch(error => error);
+                .get("http://localhost:3000/Fields");
         }
 
         getTableData = () => {
             // get http://localhost:3000/Data
             return this.$http
-                .get("http://localhost:3000/Data")
-                .then( data => data )
-                .catch(error => error );
+                .get("http://localhost:3000/Data");
         }
 
         deleteTableData = (id) => {

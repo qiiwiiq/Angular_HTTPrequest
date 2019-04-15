@@ -4,11 +4,10 @@ namespace myAPP {
     angular.module("myApp", []);
 
     export class myCtrl {
-        static $inject = ['$scope', '$q', '$window', 'myService'];
+        static $inject = ['$scope', '$q', 'myService'];
 
         constructor(private $scope: any,
                     private $q: ng.IQService,
-                    private $window: any,
                     private myService: any
         ) {
             // 表單初始化
@@ -67,7 +66,7 @@ namespace myAPP {
             }
 
             // 清空表單
-            $scope.rest = () => {
+            $scope.reset = () => {
                 $scope.model = {
                     "number": '',
                     "name": '',
@@ -108,9 +107,9 @@ namespace myAPP {
 
             // 刪除資料
             $scope.delete = (e) => {
-                console.log('刪除一筆資料')
                 myService.deleteTableData(e.target.value)
                 .then(()=> {
+                    console.log('刪除一筆資料');
                     // 更新 $scope.table 資料
                     getData();
                 });
